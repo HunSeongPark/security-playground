@@ -10,6 +10,9 @@ import java.util.Collection;
 
 /**
  * Created by Hunseong on 2022/05/14
+ * 로그인 완료 시 Security는 Security Session에 Authentication 객체를 저장
+ * Authentication 객체는 내부에 UserDetails를 가짐
+ * PrincipalDetails - UserDetails를 implements하여 애플리케이션에 맞게 Custom으로 구성
  */
 public class PrincipalDetails implements UserDetails {
 

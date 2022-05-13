@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>index page</title>
 </head>
 <body>
 <h1>Index Page</h1>
+<a href="/loginForm" th:unless="${isLogin}">로그인</a>
+<a href="/logout" th:if="${isLogin}">로그아웃</a>
+<a href="/joinForm">회원가입</a>
 </body>
 </html>

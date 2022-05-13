@@ -1,12 +1,15 @@
 package com.hunseong.basic.controller;
 
+import com.hunseong.basic.auth.PrincipalDetails;
 import com.hunseong.basic.domain.Role;
 import com.hunseong.basic.domain.User;
 import com.hunseong.basic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +26,8 @@ public class IndexController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public String root() {
+    public String root(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        model.addAttribute("isLogin", principalDetails != null);
         return "index";
     }
 
