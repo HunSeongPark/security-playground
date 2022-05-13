@@ -30,6 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/loginForm") // 로그인 페이지 url
                 .loginProcessingUrl("/login") // Security가 login process를 실행할 url
-                .defaultSuccessUrl("/"); // 로그인 성공 시 redirect 될 기본 url
+                .defaultSuccessUrl("/") // 로그인 성공 시 redirect 될 기본 url
+                .and()
+                .oauth2Login()
+                .loginPage("/loginForm")
+                .userInfoEndpoint()
+                .userService(principalOAuth2UserService); // 로그인 완료 후 Token + 사용자 프로필 받아옴
     }
 }
