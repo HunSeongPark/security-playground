@@ -20,11 +20,6 @@ public class BaseApiController {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    @GetMapping("/")
-    public String root() {
-        return "redirect:/home";
-    }
-
     @GetMapping("/home")
     public String home() {
         return "<h1>home</h1>";
