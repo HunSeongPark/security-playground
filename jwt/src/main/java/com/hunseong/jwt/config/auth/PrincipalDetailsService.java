@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Hunseong on 2022/05/14
  */
+@Service
 @RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 

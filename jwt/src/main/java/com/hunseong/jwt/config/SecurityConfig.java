@@ -1,5 +1,6 @@
 package com.hunseong.jwt.config;
 
+import com.hunseong.jwt.config.jwt.JwtAuthenticationFilter;
 import com.hunseong.jwt.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(corsFilter)
                 .formLogin().disable()
                 .httpBasic().disable()
+                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
                 .authenticated()
