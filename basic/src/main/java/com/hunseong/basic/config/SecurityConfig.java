@@ -21,9 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**")
                 .authenticated() // 인증 완료 시 접근 가능
                 .antMatchers("/manager/**")
-                .hasAnyRole(Role.ROLE_MANAGER.name(), Role.ROLE_ADMIN.name()) // 해당하는 Role만 접근 가능
+                .hasAnyRole(Role.MANAGER.name(), Role.ADMIN.name()) // 해당하는 Role만 접근 가능
                 .antMatchers("/admin/**")
-                .hasRole(Role.ROLE_ADMIN.name())
+                .hasRole(Role.ADMIN.name())
                 .anyRequest()
                 .permitAll()
                 .and()
