@@ -1,7 +1,9 @@
 package com.hunseong.jwt.config;
 
 import com.hunseong.jwt.config.jwt.JwtAuthenticationFilter;
+import com.hunseong.jwt.config.jwt.JwtAuthorizationFilter;
 import com.hunseong.jwt.domain.Role;
+import com.hunseong.jwt.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,7 +23,7 @@ import static com.hunseong.jwt.domain.Role.*;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
-
+    private final UserRepository userRepository;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -31,9 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
-                .authenticated()
+                .hasAnyRole(USER.name())
                 .antMatchers("/api/v1/manager/**")
                 .hasAnyRole(MANAGER.name(), ADMIN.name())
                 .antMatchers("/api/v1/admin/**")
