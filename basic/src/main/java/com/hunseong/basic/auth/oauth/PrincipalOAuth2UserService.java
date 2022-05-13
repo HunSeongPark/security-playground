@@ -3,6 +3,7 @@ package com.hunseong.basic.auth.oauth;
 import com.hunseong.basic.auth.PrincipalDetails;
 import com.hunseong.basic.auth.oauth.provider.FacebookOAuth2UserInfo;
 import com.hunseong.basic.auth.oauth.provider.GoogleOAuth2UserInfo;
+import com.hunseong.basic.auth.oauth.provider.NaverOAuth2UserInfo;
 import com.hunseong.basic.auth.oauth.provider.OAuth2UserInfo;
 import com.hunseong.basic.domain.User;
 import com.hunseong.basic.repository.UserRepository;
@@ -54,6 +55,8 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
             return new GoogleOAuth2UserInfo(oAuth2User.getAttributes());
         } else if (provider.equals("facebook")) {
           return new FacebookOAuth2UserInfo(oAuth2User.getAttributes());
+        } else if (provider.equals("naver")) {
+            return new NaverOAuth2UserInfo(oAuth2User.getAttribute("response"));
         } // TODO 새로운 Provider 추가 시 OAuth2UserInfo interface 구현체 추가
 
         return null;
